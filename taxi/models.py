@@ -4,12 +4,18 @@ from django.db import models
 
 
 class Manufacturer(models.Model):
-    name = models.CharField(unique=True)
-    country = models.CharField()
+    name = models.CharField(
+        unique=True,
+        max_length=63
+    )
+    country = models.CharField(max_length=63)
 
 
 class Driver(AbstractUser):
-    license_number = models.CharField(unique=True)
+    license_number = models.CharField(
+        unique=True,
+        max_length=30
+    )
 
     class Meta:
         verbose_name = "driver"
@@ -17,7 +23,7 @@ class Driver(AbstractUser):
 
 
 class Car(models.Model):
-    model = models.CharField()
+    model = models.CharField(max_length=63)
     manufacturer = models.ForeignKey(
         Manufacturer,
         related_name="cars",
